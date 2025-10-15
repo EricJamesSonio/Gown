@@ -15,6 +15,10 @@ import { createTable as createOrderItemsTable} from './model/order_item.js';
 import { createTable as createReceiptsTable} from './model/receipt.js';
 import { createTable as createDiscountsTable} from './model/discount.js';
 
+// Seeds
+import { seedGownItems } from './seed/gown_item.js';
+import { seedUsers } from './seed/user.js';
+
 async function initDB() {
   console.log("🧱 Creating tables...");
 
@@ -32,6 +36,11 @@ async function initDB() {
   await createOrderItemsTable();
   await createReceiptsTable();
   await createDiscountsTable();
+
+  // Seeds
+  await seedUsers();
+  await seedGownItems();
+
 
   console.log("✅ All tables created successfully!");
   await db.end();
