@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Product from "./pages/Product";
 import Profile from "./pages/Profile";
-import "./css/App.css";
-import "./css/Navbar.css";
+import "./css/pages/App.css";
+import "./css/components/Navbar.css";
 
 export default function App() {
   return (

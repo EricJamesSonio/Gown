@@ -1,4 +1,4 @@
-import "../css/Button.css";
+import "../css/components/Button.css";
 
 export default function Button({ label, onClick, type = "primary" }) {
   return (

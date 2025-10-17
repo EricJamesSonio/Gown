@@ -1,5 +1,5 @@
 // src/components/ProfileModal.jsx
-import "../css/ProfileModal.css";
+import "../css/components/ProfileModal.css";
 
 export default function ProfileModal({ isOpen, onClose, user }) {
   if (!isOpen) return null;

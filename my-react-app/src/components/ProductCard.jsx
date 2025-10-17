@@ -1,4 +1,4 @@
-import "../css/ProductCard.css";
+import "../css/components/ProductCard.css";
 import Button from "./Button";
 
 export default function ProductCard({ name, price, image, onAddToCart }) {

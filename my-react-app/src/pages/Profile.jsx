@@ -1,5 +1,5 @@
 // src/pages/Profile.jsx
-import "../css/Profile.css";
+import "../css/pages/Profile.css";
 
 export default function Profile() {
   const user = {

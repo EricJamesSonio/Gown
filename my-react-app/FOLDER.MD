@@ -1,32 +1,31 @@
-my-react-app/
+public/
+├── gowns/
+│   ├── blackgown.jpg
+│   ├── redgown.jpg (etc.)
+├── profile/
+│   ├── profile.jpg
+|
+|
+src/
 │
-├── node_modules/
+├── components/
+│   ├── Navbar.jsx
+│   ├── Button.jsx
+│   └── ProductCard.jsx
 │
-├── public/
-│   └── (your public assets like favicon, images, etc.)
-│
-├── src/
+├── css/
 │   ├── components/
-│   │   └── Navbar.jsx
-│   │   └── Button.jsx
-│   │   └── Productcard.jsx
-│   ├── css/
-│   │   └── App.css
-│   │   └── Navbar.css
-│   │   └── Button.css
-│   │   └── ProductCart.css
-│   ├── pages/
-│   │   └── Product.jsx
-│   ├── App.jsx
-│   ├── main.jsx
-│   
+│   │   ├── Navbar.css
+│   │   ├── Button.css
+│   │   └── ProductCard.css
+│   │
+│   └── pages/
+│       ├── App.css
+│       └── Profile.css
 │
-├── .gitignore
-├── eslint.config.js
-├── FOLDER.MD
-├── index.html
-├── jsconfig.json
-├── package-lock.json
-├── package.json
-├── README.md
-└── vite.config.js
+├── pages/
+│   ├── Product.jsx
+│   └── Profile.jsx
+│
+├── App.jsx
+└── main.jsx

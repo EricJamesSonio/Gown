@@ -1,5 +1,5 @@
 import ProductCard from "../components/ProductCard";
-import "../css/ProductCard.css";
+import "../css/components/ProductCard.css";
 
 export default function Product() {
   const products = [
