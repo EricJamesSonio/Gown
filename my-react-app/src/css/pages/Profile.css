@@ -1,64 +1,90 @@
-/* src/css/Profile.css */
+/* 🌈 Modern E-Commerce Profile Page with Soft Animations */
 
 .profile-page {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f8fafc;
-  padding-top: 80px; /* space for fixed navbar */
+  padding-top: 80px;
+  background: linear-gradient(135deg, #f0f4ff 0%, #dbeafe 50%, #fef2f2 100%);
+  font-family: "Inter", system-ui, sans-serif;
+  animation: fadeIn 0.8s ease-out;
 }
 
+/* ✨ Glass-like profile card */
 .profile-card {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  width: 400px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 420px;
   max-width: 90%;
-  padding: 2rem;
+  padding: 2.5rem;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: fadeUp 0.9s ease forwards;
 }
 
 .profile-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
 }
 
+/* 🧑‍💻 Profile Header */
 .profile-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
+  animation: slideDown 0.8s ease-out;
 }
 
 .profile-avatar {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #2563eb;
+  border: 4px solid #2563eb;
   margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
 }
 
 .profile-header h2 {
   margin: 0;
-  color: #0f172a;
-  font-size: 1.5rem;
+  color: #1e293b;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .profile-id {
   color: #64748b;
   font-size: 0.9rem;
+  margin-top: 0.3rem;
 }
 
+/* 📋 Profile Details */
 .profile-details {
   text-align: left;
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
   line-height: 1.8;
+  background: rgba(241, 245, 249, 0.7);
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  animation: fadeUp 1.1s ease-out;
 }
 
 .detail-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
 }
 
 .label {
@@ -68,51 +94,103 @@
 
 .value {
   color: #0f172a;
+  font-weight: 500;
 }
 
+/* 🎯 Profile Actions */
 .profile-actions {
-  margin-top: 2rem;
+  margin-top: 2.2rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
+  animation: fadeUp 1.3s ease-out;
 }
 
 .btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   border: none;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
 .btn.edit {
-  background-color: #2563eb;
-  color: white;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
 .btn.edit:hover {
-  background-color: #1e40af;
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
 }
 
 .btn.logout {
-  background-color: #ef4444;
-  color: white;
+  background: linear-gradient(135deg, #ef4444, #f87171);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
 }
 
 .btn.logout:hover {
-  background-color: #b91c1c;
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
 }
 
+/* 🌟 Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
 @media (max-width: 480px) {
   .profile-card {
     width: 90%;
-    padding: 1.5rem;
+    padding: 1.8rem;
+  }
+
+  .profile-header h2 {
+    font-size: 1.4rem;
   }
 
   .profile-details {
     font-size: 0.9rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.1rem;
   }
 }

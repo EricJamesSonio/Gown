@@ -12,20 +12,24 @@ src/
 │   ├── Navbar.jsx
 │   ├── Button.jsx
 │   └── ProductCard.jsx
+│   └── TeamCard.jsx
 │
 ├── css/
 │   ├── components/
 │   │   ├── Navbar.css
 │   │   ├── Button.css
 │   │   └── ProductCard.css
+│   │   └── TeamCard.css
 │   │
 │   └── pages/
 │       ├── App.css
 │       └── Profile.css
+│       └── About.css
 │
 ├── pages/
 │   ├── Product.jsx
 │   └── Profile.jsx
+│   └── About.jsx
 │
 ├── App.jsx
 └── main.jsx

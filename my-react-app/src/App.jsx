@@ -23,7 +23,7 @@ export default function App() {
             element={
               <section className="page-section">
                 <h2>Welcome to My App</h2>
-                <p>This is the main content area below the fixed navbar.</p>
+                <p>This App is my first react project, PRACTICING REACT</p>
               </section>
             }
           />

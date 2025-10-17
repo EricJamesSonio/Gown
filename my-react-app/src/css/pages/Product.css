@@ -1,0 +1,139 @@
+/* 🎀 Modern Luxury Product Page */
+
+.product-page {
+  min-height: 100vh;
+  padding: 6rem 3rem 5rem;
+  background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 50%, #ffe4e6 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* 🛍️ Header */
+.product-page h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 3rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 🧩 Product Grid — Spacious, Airy */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem 3.5rem; /* ⬅ more space between cards */
+  width: 100%;
+  max-width: 1200px;
+  justify-items: center;
+  padding: 0 1rem;
+}
+
+/* 🧊 Product Card (Base) */
+.product-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
+  width: 300px;
+  text-align: center;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  padding-bottom: 1.2rem;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* 🖼️ Image */
+.product-card img {
+  width: 80%;
+  height: 230px;
+  object-fit: cover;
+  border-bottom: 3px solid #3b82f6;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* 🏷️ Info */
+.product-card h3 {
+  color: #0f172a;
+  margin: 1.2rem 0 0.4rem;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.product-card p {
+  color: #475569;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 🛒 Add to Cart Button */
+.add-to-cart-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.add-to-cart-btn:active {
+  transform: scale(0.98);
+}
+
+/* ✨ Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 1024px) {
+  .product-grid {
+    gap: 2.5rem;
+  }
+
+  .product-card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-page h2 {
+    font-size: 2rem;
+  }
+
+  .product-grid {
+    gap: 2rem;
+  }
+
+  .product-card {
+    width: 95%;
+  }
+}
