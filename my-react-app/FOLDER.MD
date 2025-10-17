@@ -25,6 +25,7 @@ src/
 │       ├── App.css
 │       └── Profile.css
 │       └── About.css
+│       └── Product.css
 │
 ├── pages/
 │   ├── Product.jsx
