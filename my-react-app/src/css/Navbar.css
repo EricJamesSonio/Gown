@@ -1,0 +1,95 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 64px;
+  background-color: #1e293b;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ center the container, not space-between */
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* ✅ keeps layout tidy on large screens */
+  height: 64px;
+  box-sizing: border-box;
+}
+
+
+/* --- Sticky color change when scrolling --- */
+.navbar.scrolled {
+  background-color: #0f172a;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Logo --- */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* --- Nav Links --- */
+.nav-links {
+  display: flex;
+  flex-wrap: nowrap; /* ✅ prevent wrapping */
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #38bdf8; /* bright cyan hover */
+}
+
+/* --- Responsive Nav --- */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 1rem;
+    z-index: 9999;
+  }
+
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 900px) {
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,22 @@
+/* src/css/App.css */
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafc;
+  font-family: system-ui, sans-serif;
+}
+
+/* ✅ This ensures content never hides under the fixed navbar */
+.main-content {
+  display: block;
+  padding-top: 64px; /* use 100px to confirm it works visually */
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.page-section {
+  text-align: center;
+  padding: 2rem;
+  color: #1e293b;
+}

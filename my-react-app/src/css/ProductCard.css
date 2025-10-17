@@ -1,0 +1,105 @@
+/* src/css/Product.css */
+
+/* Page layout */
+.product-page {
+  padding: 2rem 1rem;
+  background-color: #f8fafc; /* light gray background */
+  min-height: 100vh;
+  text-align: center;
+  color: #1e293b; /* slate text color */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.product-page h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #0f172a; /* dark slate */
+}
+
+/* Product grid container */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+/* Product card styling */
+.product-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  width: 240px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.product-card p {
+  font-size: 0.95rem;
+  color: #475569;
+  margin: 0.4rem 0;
+}
+
+/* Price text */
+.product-card .price {
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0.6rem 0;
+}
+
+/* Add to Cart Button */
+.product-card button {
+  margin-top: 0.5rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.product-card button:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.03);
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 600px) {
+  .product-page h2 {
+    font-size: 1.6rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    width: 90%;
+  }
+}
