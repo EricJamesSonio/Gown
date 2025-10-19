@@ -2,6 +2,7 @@
 import "../css/pages/Profile.css";
 
 export default function Profile() {
+  
   const user = {
     name: "Eric James",
     id: "USER12345",
@@ -12,9 +13,11 @@ export default function Profile() {
   };
 
   return (
+    
     <section className="profile-page">
       <div className="profile-card">
         <div className="profile-header">
+          
           <img
             src={user.image}
             alt="Profile"

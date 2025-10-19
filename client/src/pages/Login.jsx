@@ -1,17 +1,51 @@
+import { useState } from "react";
+import AuthForm from "../components/login/AuthForm";
 import "../css/pages/Login.css";
 
 export default function Login() {
-  return (
-    <section className="login-container">
-      <h2 className="login-title">Welcome to My App</h2>
-      <p className="login-description">
-        This App is my first React project — PRACTICING REACT 💻
-      </p>
+  const [isLogin, setIsLogin] = useState(true);
 
-      <section className="login-test">
-        <h2>Tailwind is working!</h2>
-        <p>If you see color and spacing, it's working ✅</p>
-      </section>
-    </section>
+  return (
+    <div className="login-page">
+      <div className="login-modal">
+        <h1 className="login-header">Welcome to My App</h1>
+        <p className="login-subtext">
+          {isLogin
+            ? "Log in to access your dashboard and continue your journey."
+            : "Create an account to start exploring awesome features!"}
+        </p>
+
+        <div className="login-toggle">
+          <button
+            className={`toggle-btn ${isLogin ? "active" : ""}`}
+            onClick={() => setIsLogin(true)}
+          >
+            Log In
+          </button>
+          <button
+            className={`toggle-btn ${!isLogin ? "active" : ""}`}
+            onClick={() => setIsLogin(false)}
+          >
+            Sign Up
+          </button>
+        </div>
+
+        <AuthForm isLogin={isLogin} />
+
+        <p className="login-footer">
+          {isLogin ? (
+            <>
+              Don’t have an account?{" "}
+              <span onClick={() => setIsLogin(false)}>Sign up here</span>.
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <span onClick={() => setIsLogin(true)}>Log in here</span>.
+            </>
+          )}
+        </p>
+      </div>
+    </div>
   );
 }

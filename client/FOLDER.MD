@@ -36,46 +36,53 @@ client/
     │   ├── Button.jsx
     │   ├── CartItem.jsx
     │   ├── CartSummary.jsx
-    │   ├── Navbar.jsx
     │   ├── ProductCard.jsx
     │   ├── ProfileModal.jsx
     │   ├── TeamCard.jsx
     │   │
+    │   ├── login/
+    │   │   └── AuthForm.jsx
+    │   │
     │   └── orders/
-    │       ├── OrderCard.jsx
-    │       ├── OrderDetailModal.jsx
-    │       ├── OrderItemRow.jsx
-    │       ├── OrderList.jsx
-    │       │
-    │       └── ui/
-    │           ├── EmptyState.jsx
-    │           └── LoadingSpinner.jsx
+    │       └── OrderSectionCard.jsx
     │
     ├── context/
     │   └── CartContext.jsx
     │
+    ├── controls/
+    │   ├── Navbar.jsx
+    │   └── OrderSideBar.jsx
+    │
     ├── css/
     │   ├── components/
     │   │   ├── AddToCartModal.css
+    │   │   ├── AuthForm.css
     │   │   ├── Button.css
     │   │   ├── CartItem.css
     │   │   ├── CartSummary.css
-    │   │   ├── Navbar.css
+    │   │   ├── OrderSectionCard.css
     │   │   ├── ProductCard.css
     │   │   ├── ProfileModal.css
     │   │   └── TeamCard.css
+    │   │
+    │   ├── controls/
+    │   │   ├── Navbar.css
+    │   │   └── OrderSideBar.css
+    │   │
+    │   ├── helpers/
+    │   │   └── Font.css
     │   │
     │   └── pages/
     │       ├── About.css
     │       ├── App.css
     │       ├── Cart.css
     │       ├── Home.css
+    │       ├── Login.css
     │       ├── Order.css
     │       ├── Product.css
     │       └── Profile.css
     │
     ├── layouts/
-    │   ├── OrderLayout.jsx
     │   ├── PageLayout.jsx
     │   └── PlainLayout.jsx
     │
