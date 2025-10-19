@@ -1,5 +1,10 @@
-// -----------------------------------------
-// Installing to conenct sql! 
-// -----------------------------------------
-cd server
-npm install express mysql2 sequelize dotenv cors
+BACKEND (SERVER SIDE)
+
+install requirements
+
+To run :
+(from root directory)
+node server/src/server.js
+
+
+
