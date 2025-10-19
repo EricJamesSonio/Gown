@@ -52,6 +52,10 @@ npm install -D tailwindcss postcss autoprefixer
 (Install them separately, after finish then install this npx tailwind etc.)
 npx tailwindcss init -p
 
+// -----------------------------------------
+// Installing Decoder for the token
+// -----------------------------------------
+npm install jwt-decode
 
 
 

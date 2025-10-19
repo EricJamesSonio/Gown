@@ -6,60 +6,38 @@ import "../css/components/ProductCard.css";
 import "../css/pages/Product.css";
 
 export default function Product() {
+  const { addToCart, userId } = useCart(); // ✅ get userId from context
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [notification, setNotification] = useState(null); // <-- floating message
-  const { cart, setCart } = useCart();
+  const [notification, setNotification] = useState(null);
 
-  // Fetch products from API
+  console.log("Product page userId:", userId); // should now log your decoded user ID
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("/api/gowns");
-        const data = await res.json();
-        setProducts(data);
-      } catch (err) {
-        console.error("Failed to fetch products:", err);
-      }
-    };
-    fetchProducts();
+    fetch("/api/gowns")
+      .then((res) => res.json())
+      .then(setProducts)
+      .catch(console.error);
   }, []);
 
-  const handleAddToCart = (product) => {
-    setSelectedProduct(product);
-  };
+  const handleAddToCart = (product) => setSelectedProduct(product);
 
-  const confirmAddToCart = (product, quantity) => {
+  const confirmAddToCart = async (product, quantity) => {
     try {
-      setCart((prev) => {
-        const existing = prev.find((item) => item.id === product.id);
-        if (existing) {
-          return prev.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + quantity }
-              : item
-          );
-        }
-        return [...prev, { ...product, quantity }];
-      });
+      await addToCart(product, quantity);
 
-      // show floating success notification
       setNotification({
         type: "success",
-        message: `Added ${quantity} x ${product.name} ($${product.price}) to cart!`
+        message: `Added ${quantity} x ${product.name} to cart!`,
       });
-
     } catch (err) {
       setNotification({
         type: "error",
-        message: `Failed to add ${product.name} to cart.`
+        message: `Failed to add ${product.name} to cart.`,
       });
     }
 
-    // close the modal immediately
     setSelectedProduct(null);
-
-    // auto-hide notification after 3 seconds
     setTimeout(() => setNotification(null), 3000);
   };
 
@@ -88,7 +66,6 @@ export default function Product() {
         )}
       </div>
 
-      {/* Floating notification OUTSIDE .product-page */}
       {notification && (
         <div className={`notification ${notification.type}`}>
           {notification.message}
@@ -96,5 +73,4 @@ export default function Product() {
       )}
     </>
   );
-
 }

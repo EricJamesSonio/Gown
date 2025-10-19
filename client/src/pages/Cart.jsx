@@ -4,30 +4,18 @@ import CartSummary from "../components/CartSummary";
 import "../css/pages/Cart.css";
 
 export default function Cart() {
-  const { cart, setCart } = useCart();
+  const { cart, updateQuantity, removeFromCart } = useCart();
 
-  const updateQuantity = (id, newQty) => {
-    if (newQty <= 0) return removeItem(id);
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: newQty } : item
-      )
-    );
+  const handleQuantityChange = (id, qty) => {
+    if (qty <= 0) return removeFromCart(id);
+    updateQuantity(id, qty);
   };
 
-  const removeItem = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <div className="cart-page">
       <h2>Your Cart</h2>
-
       {cart.length === 0 ? (
         <p className="empty-cart">Your cart is empty 🛒</p>
       ) : (
@@ -37,8 +25,8 @@ export default function Cart() {
               <CartItem
                 key={item.id}
                 item={item}
-                onQuantityChange={updateQuantity}
-                onRemove={removeItem}
+                onQuantityChange={handleQuantityChange}
+                onRemove={removeFromCart}
               />
             ))}
           </div>
