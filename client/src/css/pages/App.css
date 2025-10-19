@@ -1,0 +1,86 @@
+/* 🌈 Modern E-Commerce Global Styles */
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: linear-gradient(135deg, #48d18a 0%, #dbeafe 50%, #fef2f2 100%);
+  color: #1e293b;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ✅ Prevents content from hiding behind fixed navbar */
+.main-content {
+  display: block;
+  padding-top: 80px; /* matches navbar height */
+  min-height: 100vh;
+  box-sizing: border-box;
+  transition: background 0.4s ease;
+}
+
+/* 🪞 Page Section Wrapper */
+.page-section {
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+}
+
+.page-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+}
+
+.page-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ✨ Smooth fade-in for every page */
+.page-section {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .page-section {
+    padding: 2rem 1.2rem;
+    margin: 1.5rem;
+  }
+
+  .page-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .page-section p {
+    font-size: 1rem;
+  }
+}

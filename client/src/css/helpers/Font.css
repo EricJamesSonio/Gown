@@ -1,0 +1,8 @@
+/* ✨ Global Font Style Only */
+body,
+#root {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

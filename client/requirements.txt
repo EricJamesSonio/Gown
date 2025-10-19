@@ -1,0 +1,57 @@
+// --------------------------------------
+// type script (OPTIONAL)
+// --------------------------------------
+npm install -g typescript
+tsc -v
+tsc -init 
+
+
+// ----------------------------------------
+// node modules
+// ----------------------------------------
+npm init -y
+npm install mysql2
+
+
+// ----------------------------------------
+// install react
+// ----------------------------------------- 
+npm create vite@latest my-react-app
+
+? Select a framework: › React
+? Select a variant: › JavaScript
+
+
+// -----------------------------------------
+// set up react
+// -----------------------------------------
+cd my-react-app
+npm install
+npm run dev
+
+
+// -----------------------------------------
+// jsconfig.json (Added so typescript is not messing around)
+// -----------------------------------------
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+}
+
+// -----------------------------------------
+// For routing of pages etc. (inside my-react-app)
+// -----------------------------------------
+npm install react-router-dom
+
+// -----------------------------------------
+// Installing Tailwind
+// -----------------------------------------
+npm install -D tailwindcss postcss autoprefixer
+(Install them separately, after finish then install this npx tailwind etc.)
+npx tailwindcss init -p
+
+
+
+

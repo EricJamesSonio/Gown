@@ -1,0 +1,198 @@
+/* =============================
+   ORDER PAGE STYLES (UPDATED)
+   ============================= */
+
+.order-page {
+  padding: 100px 8%;
+  background: linear-gradient(135deg, #c5424d, #fdf2f8);
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1e293b;
+}
+
+/* =============================
+   HEADER
+   ============================= */
+.order-page header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.order-page header h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.order-page header p {
+  font-size: 1rem;
+  color: #475569;
+}
+
+/* =============================
+   CONTENT GRID
+   ============================= */
+.order-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.order-list {
+  flex: 2;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* =============================
+   ORDER CARD
+   ============================= */
+.order-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+
+/* =============================
+   STATUS BADGES
+   ============================= */
+.order-status.delivered {
+  background-color: #dcfce7;
+  color: #15803d;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.order-status.processing {
+  background-color: #fef9c3;
+  color: #a16207;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.order-status.pending {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+/* =============================
+   EMPTY STATE
+   ============================= */
+.empty-orders {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* =============================
+   MODAL (DETAIL VIEW)
+   ============================= */
+.order-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.order-modal-content {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+  animation: scaleIn 0.25s ease-in-out;
+}
+
+.order-modal button {
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.15);
+  transition: box-shadow 0.2s ease;
+}
+
+.order-modal button:hover {
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+/* =============================
+   LOADING SPINNER
+   ============================= */
+.loading-spinner {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner svg {
+  border-color: #60a5fa;
+  animation: spin 0.9s linear infinite;
+}
+
+/* =============================
+   ANIMATIONS
+   ============================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
+@media (max-width: 768px) {
+  .order-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .order-page header h1 {
+    font-size: 1.75rem;
+  }
+
+  .order-page header p {
+    font-size: 0.9rem;
+  }
+}
