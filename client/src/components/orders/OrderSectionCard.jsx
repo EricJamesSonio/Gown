@@ -1,5 +1,6 @@
 // src/components/orders/OrderSectionCard.jsx
 import React from "react";
+import "../../css/components/OrderSectionCard.css";
 
 export default function OrderSectionCard({ title, description, children }) {
   return (

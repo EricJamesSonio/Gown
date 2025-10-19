@@ -68,9 +68,9 @@ export default function AppRoutes() {
       <Route
         path="/login"
         element={
-          <PlainLayout>
+          <PageLayout>
             <Login />
-          </PlainLayout>
+          </PageLayout>
         }
       />
     </Routes>

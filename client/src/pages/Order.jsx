@@ -1,12 +1,13 @@
 import React from "react";
 import "../css/pages/Order.css";
 import OrderSectionCard from "../components/orders/OrderSectionCard";
+import OrderSidebar from "../controls/OrderSidebar";
 
 const Order = () => {
   return (
-    <div className="order-page flex gap-6 p-6 relative">
+    <div className="order-page">
       {/* Main Order Sections */}
-      <div className="order-main flex-1 flex flex-wrap justify-between gap-4">
+      <div className="order-main">
         <OrderSectionCard
           title="Your Order Summary"
           description="Thank you for shopping with us! Review your order details below before proceeding to checkout."
@@ -42,16 +43,8 @@ const Order = () => {
         </OrderSectionCard>
       </div>
 
-      {/* Fixed Sidebar */}
-      <aside className="order-sidebar fixed right-6 top-24 w-72 bg-white shadow-lg rounded-2xl p-6 border border-gray-200">
-        <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-        <ul className="space-y-3 text-gray-700">
-          <li className="hover:text-indigo-600 cursor-pointer">Track Order</li>
-          <li className="hover:text-indigo-600 cursor-pointer">Cancel Order</li>
-          <li className="hover:text-indigo-600 cursor-pointer">Download Invoice</li>
-          <li className="hover:text-indigo-600 cursor-pointer">Contact Support</li>
-        </ul>
-      </aside>
+      {/* Sidebar */}
+      <OrderSidebar />
     </div>
   );
 };
