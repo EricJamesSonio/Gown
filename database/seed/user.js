@@ -1,11 +1,9 @@
-import { db } from '../../config/db.js';
+import { db } from '../config/db.js';
 
 export async function seedUsers() {
   const users = [
-    {
-      name: 'Admin User',
-      role: 'admin'
-    }
+    { name: 'Admin User', role: 'admin' },
+    { name: 'Customer User', role: 'customer' }
   ];
 
   for (const user of users) {
@@ -15,5 +13,5 @@ export async function seedUsers() {
     );
   }
 
-  console.log("👤 Admin user seeded!");
+  console.log("👤 Users seeded!");
 }

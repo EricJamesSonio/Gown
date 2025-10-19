@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/components/OrderSidebar.css";
+import "../css/controls/OrderSidebar.css";
 
 export default function OrderSidebar() {
   return (

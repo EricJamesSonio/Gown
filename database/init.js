@@ -1,4 +1,4 @@
-import { db } from '../config/db.js';
+import { db } from './config/db.js';
 
 import { createTable as createUsersTable } from './model/user.js';
 import { createTable as createContactsTable} from './model/contact.js';
@@ -18,6 +18,7 @@ import { createTable as createDiscountsTable} from './model/discount.js';
 // Seeds
 import { seedGownItems } from './seed/gown_item.js';
 import { seedUsers } from './seed/user.js';
+import { seedAuth } from './seed/auth.js';
 
 async function initDB() {
   console.log("🧱 Creating tables...");
@@ -40,7 +41,7 @@ async function initDB() {
   // Seeds
   await seedUsers();
   await seedGownItems();
-
+  await seedAuth();
 
   console.log("✅ All tables created successfully!");
   await db.end();

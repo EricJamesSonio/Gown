@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Just wanting to start a practice on NODE.JS!",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +19,11 @@
   },
   "homepage": "https://github.com/EricJamesSonio/Gown#readme",
   "dependencies": {
-    "mysql2": "^3.15.2"
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.2",
+    "sequelize": "^6.37.7"
   }
 }

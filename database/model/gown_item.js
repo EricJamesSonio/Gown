@@ -1,4 +1,4 @@
-import { db } from '../../config/db.js';
+import { db } from '../config/db.js';
 
 export async function createTable() {
   await db.execute(`
@@ -8,6 +8,7 @@ export async function createTable() {
       price DECIMAL(10,2) NOT NULL,
       description TEXT,
       quantity INT DEFAULT 0,
+      image_url VARCHAR(255),          -- new column for image
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       created_by INT,
       FOREIGN KEY (created_by) REFERENCES users(id)

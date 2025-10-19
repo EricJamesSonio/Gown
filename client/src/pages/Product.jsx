@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard";
 import AddToCartModal from "../components/AddToCartModal";
@@ -6,61 +6,95 @@ import "../css/components/ProductCard.css";
 import "../css/pages/Product.css";
 
 export default function Product() {
-  const products = [
-    { id: 1, name: "White Gown", price: 180, image: "/gowns/whitegown.jpg" },
-    { id: 2, name: "Red Gown", price: 120, image: "/gowns/redgown.jpg" },
-    { id: 3, name: "Purple Gown", price: 200, image: "/gowns/purplegown.jpg" },
-    { id: 4, name: "Pink Gown", price: 250, image: "/gowns/pinkgown.jpg" },
-    { id: 5, name: "Blue Gown", price: 120, image: "/gowns/bluegown.jpg" },
-    { id: 6, name: "Black Gown", price: 300, image: "/gowns/blackgown.jpg" },
-  ];
-
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [notification, setNotification] = useState(null); // <-- floating message
   const { cart, setCart } = useCart();
+
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("/api/gowns");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (product) => {
     setSelectedProduct(product);
   };
 
   const confirmAddToCart = (product, quantity) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      }
-      return [...prev, { ...product, quantity }];
-    });
+    try {
+      setCart((prev) => {
+        const existing = prev.find((item) => item.id === product.id);
+        if (existing) {
+          return prev.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          );
+        }
+        return [...prev, { ...product, quantity }];
+      });
+
+      // show floating success notification
+      setNotification({
+        type: "success",
+        message: `Added ${quantity} x ${product.name} ($${product.price}) to cart!`
+      });
+
+    } catch (err) {
+      setNotification({
+        type: "error",
+        message: `Failed to add ${product.name} to cart.`
+      });
+    }
+
+    // close the modal immediately
     setSelectedProduct(null);
+
+    // auto-hide notification after 3 seconds
+    setTimeout(() => setNotification(null), 3000);
   };
 
   return (
-    <div className="product-page">
-      <h2>Our Products</h2>
-      <div className="product-grid">
-        {products.map((p) => (
-          <ProductCard
-            key={p.id}
-            name={p.name}
-            price={p.price}
-            image={p.image}
-            onAddToCart={() => handleAddToCart(p)}
+    <>
+      <div className="product-page">
+        <h2>Our Products</h2>
+        <div className="product-grid">
+          {products.map((p) => (
+            <ProductCard
+              key={p.id}
+              name={p.name}
+              price={p.price}
+              image={p.image_url}
+              onAddToCart={() => handleAddToCart(p)}
+            />
+          ))}
+        </div>
+
+        {selectedProduct && (
+          <AddToCartModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onConfirm={confirmAddToCart}
           />
-        ))}
+        )}
       </div>
 
-      {selectedProduct && (
-        <AddToCartModal
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onConfirm={confirmAddToCart}
-        />
+      {/* Floating notification OUTSIDE .product-page */}
+      {notification && (
+        <div className={`notification ${notification.type}`}>
+          {notification.message}
+        </div>
       )}
-    </div>
+    </>
   );
+
 }
-
-

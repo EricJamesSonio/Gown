@@ -8,7 +8,8 @@ export default function CartItem({ item, onQuantityChange, onRemove }) {
 
   return (
     <div className="cart-item">
-      <img src={item.image} alt={item.name} className="cart-item-image" />
+      {/* Use image_url from API */}
+      <img src={item.image_url} alt={item.name} className="cart-item-image" />
 
       <div className="cart-item-info">
         <h4>{item.name}</h4>
