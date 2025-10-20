@@ -4,6 +4,12 @@ let's have some fun! (i hope so)
 
 added type script
 
+< ------------------------------ Project Folder ---------------------------------->
+[Client]    - Frontend (REACT.JS)        
+[Server]    - Backend (EXPRESS.JS)
+[Database]  - Database (MYSQL XAMPP)
+< -------------------------------------------------------------------------------->
+
 Start Date : October 14, 2025
 
 < ---------------------------- What i've learned ------------------------------ >
