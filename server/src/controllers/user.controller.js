@@ -1,6 +1,6 @@
-import * as userService from '../services/user.service.js';
+// server/src/controllers/user.controller.js
+import * as userService from "../services/user.service.js";
 
-// Signup a new user
 export const signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -11,8 +11,7 @@ export const signup = async (req, res, next) => {
   }
 };
 
-// Login user
-export const login = async (req, res, next) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const data = await userService.login({ email, password });
@@ -22,12 +21,9 @@ export const login = async (req, res, next) => {
   }
 };
 
-// Get logged-in user's profile
 export const profile = async (req, res, next) => {
   try {
-    // userId is attached by verifyToken middleware
     const userId = req.user.userId;
-
     const user = await userService.getProfile(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 

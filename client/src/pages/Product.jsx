@@ -4,12 +4,12 @@ import ProductCard from "../components/ProductCard";
 import AddToCartModal from "../components/AddToCartModal";
 import "../css/components/ProductCard.css";
 import "../css/pages/Product.css";
-
 export default function Product() {
   const { addToCart, userId } = useCart(); // ✅ get userId from context
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [notification, setNotification] = useState(null);
+
 
   console.log("Product page userId:", userId); // should now log your decoded user ID
 

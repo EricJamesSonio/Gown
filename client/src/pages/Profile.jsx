@@ -1,26 +1,9 @@
-import { useEffect, useState } from "react";
+// src/pages/Profile.jsx
+import { useUser } from "../context/UserContext";
 import "../css/pages/Profile.css";
 
 export default function Profile() {
-  const [user, setUser] = useState(null);
-  const token = localStorage.getItem("token"); // JWT saved after login
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await fetch("/api/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) throw new Error("Failed to fetch profile");
-        const data = await res.json();
-        setUser(data);
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
-
-    fetchProfile();
-  }, [token]);
+  const { user, logout } = useUser();
 
   if (!user) return <p>Loading profile...</p>;
 
@@ -58,13 +41,7 @@ export default function Profile() {
 
         <div className="profile-actions">
           <button className="btn edit">Edit Profile</button>
-          <button
-            className="btn logout"
-            onClick={() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-            }}
-          >
+          <button className="btn logout" onClick={logout}>
             Logout
           </button>
         </div>

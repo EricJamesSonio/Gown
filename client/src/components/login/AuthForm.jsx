@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // <--- import navigate
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext"; // ⬅️ import
 import "../../css/components/AuthForm.css";
 
 export default function AuthForm({ isLogin }) {
@@ -7,7 +8,8 @@ export default function AuthForm({ isLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate(); // <--- initialize navigate
+  const navigate = useNavigate();
+  const { login } = useUser(); // ⬅️ access context login()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,10 +32,11 @@ export default function AuthForm({ isLogin }) {
       );
 
       if (isLogin) {
-        localStorage.setItem("token", data.token); // save JWT
-        navigate("/products"); // <--- redirect after login
+        login(data.token); // ✅ update context + localStorage
+        navigate("/products");
+        window.location.reload(); // 🔥 instant app refresh
       } else {
-        navigate("/products"); // optional: redirect after signup
+        navigate("/products");
       }
     } catch (err) {
       setMessage(err.message);
@@ -53,7 +56,6 @@ export default function AuthForm({ isLogin }) {
           />
         </div>
       )}
-
       <div className="input-group">
         <label>Email</label>
         <input
@@ -63,7 +65,6 @@ export default function AuthForm({ isLogin }) {
           placeholder="Enter your email"
         />
       </div>
-
       <div className="input-group">
         <label>Password</label>
         <input
@@ -73,11 +74,9 @@ export default function AuthForm({ isLogin }) {
           placeholder="Enter your password"
         />
       </div>
-
       <button type="submit" className="submit-btn">
         {isLogin ? "Log In" : "Create Account"}
       </button>
-
       {message && <p className="form-message">{message}</p>}
     </form>
   );

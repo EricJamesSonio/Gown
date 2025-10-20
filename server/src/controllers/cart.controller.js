@@ -1,4 +1,4 @@
-import { db } from '../config/db.js';
+import { CartModel } from '../models/cart.model.js';
 
 // Add item to cart
 export const addToCart = async (req, res) => {
@@ -8,62 +8,45 @@ export const addToCart = async (req, res) => {
     return res.status(400).json({ success: false, message: "User ID or Product ID missing" });
   }
 
-  size = size ?? "";       // default to empty string
-  quantity = quantity || 1; // default to 1
+  size = size ?? "";
+  quantity = quantity || 1;
 
   try {
-    const [existing] = await db.execute(
-      `SELECT id, quantity FROM cart_items WHERE user_id = ? AND gown_id = ? AND size = ?`,
-      [user_id, gown_id, size]
-    );
+    const existing = await CartModel.findExisting(user_id, gown_id, size);
 
     if (existing.length > 0) {
-      await db.execute(
-        `UPDATE cart_items SET quantity = quantity + ? WHERE id = ?`,
-        [quantity, existing[0].id]
-      );
+      await CartModel.incrementQuantity(existing[0].id, quantity);
     } else {
-      await db.execute(
-        `INSERT INTO cart_items (user_id, gown_id, size, quantity) VALUES (?, ?, ?, ?)`,
-        [user_id, gown_id, size, quantity]
-      );
+      await CartModel.addItem(user_id, gown_id, size, quantity);
     }
 
-    res.json({ success: true, message: 'Item added to cart' });
+    res.json({ success: true, message: "Item added to cart" });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: 'Database error' });
+    console.error("Add to cart error:", err);
+    res.status(500).json({ success: false, message: "Database error" });
   }
 };
 
 // Get all cart items for a user
 export const getCartItems = async (req, res) => {
   const { user_id } = req.params;
-
   try {
-    const [items] = await db.execute(
-      `SELECT c.id, g.id AS gown_id, g.name, g.price, g.image_url, c.quantity, c.size
-       FROM cart_items c
-       JOIN gown_items g ON c.gown_id = g.id
-       WHERE c.user_id = ?`,
-      [user_id]
-    );
+    const items = await CartModel.getByUser(user_id);
     res.json(items);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch cart' });
+    console.error("Get cart error:", err);
+    res.status(500).json({ message: "Failed to fetch cart" });
   }
 };
 
 // Remove a specific cart item
 export const removeCartItem = async (req, res) => {
   const { id } = req.params;
-
   try {
-    await db.execute(`DELETE FROM cart_items WHERE id = ?`, [id]);
+    await CartModel.deleteById(id);
     res.json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error("Remove cart item error:", err);
     res.status(500).json({ success: false });
   }
 };
@@ -75,13 +58,13 @@ export const updateCartItem = async (req, res) => {
 
   try {
     if (quantity <= 0) {
-      await db.execute(`DELETE FROM cart_items WHERE id = ?`, [id]);
+      await CartModel.deleteById(id);
     } else {
-      await db.execute(`UPDATE cart_items SET quantity = ? WHERE id = ?`, [quantity, id]);
+      await CartModel.updateQuantity(id, quantity);
     }
     res.json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error("Update cart item error:", err);
     res.status(500).json({ success: false });
   }
 };
@@ -90,10 +73,10 @@ export const updateCartItem = async (req, res) => {
 export const clearCart = async (req, res) => {
   const { userId } = req.params;
   try {
-    await db.execute(`DELETE FROM cart_items WHERE user_id = ?`, [userId]);
+    await CartModel.deleteByUser(userId);
     res.json({ success: true, message: "Cart cleared successfully" });
   } catch (err) {
-    console.error(err);
+    console.error("Clear cart error:", err);
     res.status(500).json({ success: false, message: "Failed to clear cart" });
   }
 };

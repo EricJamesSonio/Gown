@@ -8,7 +8,7 @@ export default function CheckoutButton() {
     if (!token) return alert("You must be logged in!");
 
     try {
-      const res = await fetch("/api/orders/checkout", {
+      const res = await fetch("/api/checkout/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
