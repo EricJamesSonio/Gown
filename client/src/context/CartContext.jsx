@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import decodeJwt from "jwt-decode"; // ✅ default import
 
-
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
@@ -15,8 +14,8 @@ export const CartProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const decoded = decodeJwt(token); // use decodeJwt
-      setUserId(decoded.userId); // get userId from token
+      const decoded = decodeJwt(token);
+      setUserId(decoded.userId);
     } catch (err) {
       console.error("Invalid token", err);
     }
@@ -32,6 +31,7 @@ export const CartProvider = ({ children }) => {
       .catch(console.error);
   }, [userId]);
 
+  // ✅ Add to cart
   const addToCart = async (product, quantity = 1, size = "") => {
     if (!userId) throw new Error("User ID is missing");
     if (!product?.id) throw new Error("Product ID is missing");
@@ -70,12 +70,14 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // ✅ Remove from cart
   const removeFromCart = async (cartItemId) => {
     if (!cartItemId) return;
     await fetch(`/api/cart/${cartItemId}`, { method: "DELETE" });
     setCart(prev => prev.filter(item => item.id !== cartItemId));
   };
 
+  // ✅ Update quantity
   const updateQuantity = async (cartItemId, quantity) => {
     if (!cartItemId) return;
     const safeQuantity = quantity || 1;
@@ -91,8 +93,28 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // ✅ Clear cart (both backend + UI)
+  const clearCart = async () => {
+    if (!userId) return;
+    try {
+      await fetch(`/api/cart/clear/${userId}`, { method: "DELETE" });
+      setCart([]); // immediately clear the UI
+    } catch (err) {
+      console.error("Failed to clear cart:", err);
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, userId }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        userId,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

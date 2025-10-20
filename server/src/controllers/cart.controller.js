@@ -1,5 +1,6 @@
 import { db } from '../config/db.js';
 
+// Add item to cart
 export const addToCart = async (req, res) => {
   let { user_id, gown_id, size, quantity } = req.body;
 
@@ -35,7 +36,6 @@ export const addToCart = async (req, res) => {
   }
 };
 
-
 // Get all cart items for a user
 export const getCartItems = async (req, res) => {
   const { user_id } = req.params;
@@ -55,7 +55,7 @@ export const getCartItems = async (req, res) => {
   }
 };
 
-// Remove a cart item
+// Remove a specific cart item
 export const removeCartItem = async (req, res) => {
   const { id } = req.params;
 
@@ -68,7 +68,7 @@ export const removeCartItem = async (req, res) => {
   }
 };
 
-// Update quantity
+// Update cart item quantity
 export const updateCartItem = async (req, res) => {
   const { id } = req.params;
   const { quantity } = req.body;
@@ -83,5 +83,17 @@ export const updateCartItem = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false });
+  }
+};
+
+// ✅ Clear all cart items for a user
+export const clearCart = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    await db.execute(`DELETE FROM cart_items WHERE user_id = ?`, [userId]);
+    res.json({ success: true, message: "Cart cleared successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Failed to clear cart" });
   }
 };

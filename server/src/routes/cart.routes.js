@@ -3,7 +3,8 @@ import {
   addToCart, 
   getCartItems, 
   removeCartItem, 
-  updateCartItem 
+  updateCartItem,
+  clearCart
 } from '../controllers/cart.controller.js';
 
 const router = express.Router();
@@ -19,5 +20,8 @@ router.delete('/:id', removeCartItem);
 
 // Update quantity for a cart item
 router.put('/:id', updateCartItem);
+
+// Clear all cart items for a user
+router.delete('/clear/:userId', clearCart);
 
 export default router;
