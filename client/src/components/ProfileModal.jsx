@@ -4,6 +4,15 @@ import "../css/components/ProfileModal.css";
 export default function ProfileModal({ isOpen, onClose, user }) {
   if (!isOpen) return null;
 
+  const displayUser = user || {
+    image: "https://via.placeholder.com/120",
+    name: "N/A",
+    id: "N/A",
+    gmail: "N/A",
+    contact: "N/A",
+    address: "N/A",
+  };
+
   return (
     <div className="profile-modal-overlay" onClick={onClose}>
       <div
@@ -16,23 +25,23 @@ export default function ProfileModal({ isOpen, onClose, user }) {
 
         <div className="profile-header">
           <img
-            src={user.image || "https://via.placeholder.com/120"}
+            src={displayUser.image || "https://via.placeholder.com/120"}
             alt="Profile"
             className="profile-avatar"
           />
-          <h2>{user.name}</h2>
-          <p className="profile-id">ID: {user.id}</p>
+          <h2>{displayUser.name}</h2>
+          <p className="profile-id">ID: {displayUser.id}</p>
         </div>
 
         <div className="profile-details">
           <p>
-            <strong>Gmail:</strong> {user.gmail}
+            <strong>Gmail:</strong> {displayUser.gmail}
           </p>
           <p>
-            <strong>Contact:</strong> {user.contact}
+            <strong>Contact:</strong> {displayUser.contact}
           </p>
           <p>
-            <strong>Address:</strong> {user.address}
+            <strong>Address:</strong> {displayUser.address}
           </p>
         </div>
       </div>
