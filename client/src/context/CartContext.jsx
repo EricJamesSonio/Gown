@@ -1,29 +1,20 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import decodeJwt from "jwt-decode"; // ✅ default import
+import { useUser } from "./UserContext"; // ✅ import user context
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
+  const { user } = useUser(); // ✅ reactively get current user
+  const userId = user?.id || null;
   const [cart, setCart] = useState([]);
-  const [userId, setUserId] = useState(null);
 
-  // Decode token from localStorage
+  // 🔁 Fetch cart items whenever userId changes
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    try {
-      const decoded = decodeJwt(token);
-      setUserId(decoded.userId);
-    } catch (err) {
-      console.error("Invalid token", err);
+    if (!userId) {
+      setCart([]);
+      return;
     }
-  }, []);
-
-  // Fetch cart items once userId is available
-  useEffect(() => {
-    if (!userId) return;
 
     fetch(`/api/cart/${userId}`)
       .then(res => res.json())

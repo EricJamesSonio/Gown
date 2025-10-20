@@ -34,7 +34,7 @@ export default function AuthForm({ isLogin }) {
       if (isLogin) {
         login(data.token); // ✅ update context + localStorage
         navigate("/products");
-        window.location.reload(); // 🔥 instant app refresh
+        
       } else {
         navigate("/products");
       }

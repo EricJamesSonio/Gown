@@ -3,10 +3,10 @@ import { createContext, useContext, useState, useEffect } from "react";
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [user, setUser] = useState(null);
 
-  // Auto-fetch profile when token changes
+  // 🔁 Sync user when token changes
   useEffect(() => {
     if (!token) {
       setUser(null);
@@ -18,11 +18,13 @@ export function UserProvider({ children }) {
         const res = await fetch("/api/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        if (!res.ok) throw new Error("Failed to fetch profile");
+        if (!res.ok) throw new Error("Invalid token");
         const data = await res.json();
         setUser(data);
       } catch (err) {
-        console.error("Profile fetch error:", err.message);
+        console.warn("Profile fetch error:", err.message);
+        localStorage.removeItem("token");
+        setToken(null);
         setUser(null);
       }
     };
@@ -30,18 +32,16 @@ export function UserProvider({ children }) {
     fetchProfile();
   }, [token]);
 
-  // ✅ refresh the page when user logs in/out to fully reload app state
+  // ✅ login/logout update context instantly (no reload)
   const login = (newToken) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
-    
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
-    window.location.reload(); // 🔥 instant reset
   };
 
   return (
