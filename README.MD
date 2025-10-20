@@ -40,4 +40,6 @@ can be used also in security if we want some pages don't have something that oth
 App.jsx - The Holder of all pages! the one that will deliver the pages to the Main.jsx!
 Main.jsx - The one that connected to the index.html! the WORLD HTML of react!
 
-index.html - This is the WORLD of react, all pages, components etc. happens inside this realm!
+index.html - This is the WORLD of react, all pages, components etc. happens inside this realm!  
+
+(Wrote this October 20, 2025) < --------------------------------------------------->
