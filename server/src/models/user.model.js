@@ -1,8 +1,8 @@
-// server/src/models/user.model.js
-import { db } from "../config/db.js";
+import { getDB } from "../config/db.js";
 
 // 👤 Create a new user
 export const createUser = async (name) => {
+  const db = getDB();
   const [result] = await db.execute(
     `INSERT INTO users (name) VALUES (?)`,
     [name]
@@ -12,6 +12,7 @@ export const createUser = async (name) => {
 
 // 📧 Create auth record
 export const createAuth = async (userId, email, passwordHash) => {
+  const db = getDB();
   await db.execute(
     `INSERT INTO auth (user_id, email, password_hash) VALUES (?, ?, ?)`,
     [userId, email, passwordHash]
@@ -20,14 +21,17 @@ export const createAuth = async (userId, email, passwordHash) => {
 
 // ☎️ Create empty contact record
 export const createContact = async (userId) => {
+  const db = getDB();
   await db.execute(
     `INSERT INTO contacts (user_id, contact_no) VALUES (?, ?)`,
+
     [userId, null]
   );
 };
 
 // 🏠 Create empty address record
 export const createAddress = async (userId) => {
+  const db = getDB();
   await db.execute(
     `INSERT INTO addresses (user_id, country_id, province_id, city_id, street, postal_code)
      VALUES (?, ?, ?, ?, ?, ?)`,
@@ -37,6 +41,7 @@ export const createAddress = async (userId) => {
 
 // 🔍 Get user by email (for login)
 export const findUserByEmail = async (email) => {
+  const db = getDB();
   const [rows] = await db.execute(
     `SELECT * 
      FROM auth 
@@ -49,6 +54,7 @@ export const findUserByEmail = async (email) => {
 
 // 🧾 Get full profile by user ID
 export const getUserProfile = async (userId) => {
+  const db = getDB();
   const [rows] = await db.execute(
     `SELECT 
         u.id, 

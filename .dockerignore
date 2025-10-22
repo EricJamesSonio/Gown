@@ -1,0 +1,25 @@
+# Node stuff
+node_modules
+npm-debug.log
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+
+# Environment files
+.env
+.env.*
+
+# Project-specific artifacts
+database/
+show-structure.sh
+FOLDER.MD
+DATABASE.MD
+README.MD
+tsconfig.backup.json

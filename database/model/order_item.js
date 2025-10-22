@@ -1,6 +1,7 @@
-import { db } from '../config/db.js';
+import { getDB } from '../config/db.js';
 
-export async function createTable() {
+export async function createOrderItemsTable() {
+  const db = getDB();
   await db.execute(`
     CREATE TABLE IF NOT EXISTS order_items (
       id INT AUTO_INCREMENT PRIMARY KEY,

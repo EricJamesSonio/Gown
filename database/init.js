@@ -1,19 +1,21 @@
-import { db } from './config/db.js';
+// database/init.js
+import { connectDB, getDB } from './config/db.js';
 
-import { createTable as createUsersTable } from './model/user.js';
-import { createTable as createContactsTable} from './model/contact.js';
-import { createTable as createAuthTable} from './model/auth.js';
-import { createTable as createCountriesTable} from './model/country.js';
-import { createTable as createProvincesTable} from './model/province.js';
-import { createTable as createCitiesTable} from './model/city.js';
-import { createTable as createAddressesTable} from './model/address.js';
-import { createTable as createGownItemsTable} from './model/gown_item.js';
-import { createTable as createSizesTable} from './model/size.js';
-import { createTable as createCartItemsTable} from './model/cart_item.js';
-import { createTable as createOrdersTable} from './model/order.js';
-import { createTable as createOrderItemsTable} from './model/order_item.js';
-import { createTable as createReceiptsTable} from './model/receipt.js';
-import { createTable as createDiscountsTable} from './model/discount.js';
+// Tables
+import { createUsersTable } from './model/user.js';
+import { createContactsTable } from './model/contact.js';
+import { createAuthTable } from './model/auth.js';
+import { createCountriesTable } from './model/country.js';
+import { createProvincesTable } from './model/province.js';
+import { createCitiesTable } from './model/city.js';
+import { createAddressesTable } from './model/address.js';
+import { createGownItemsTable } from './model/gown_item.js';
+import { createSizesTable } from './model/size.js';
+import { createCartItemsTable } from './model/cart_item.js';
+import { createOrdersTable } from './model/order.js';
+import { createOrderItemsTable } from './model/order_item.js';
+import { createReceiptsTable } from './model/receipt.js';
+import { createDiscountsTable } from './model/discount.js';
 
 // Seeds
 import { seedGownItems } from './seed/gown_item.js';
@@ -21,30 +23,42 @@ import { seedUsers } from './seed/user.js';
 import { seedAuth } from './seed/auth.js';
 
 async function initDB() {
-  console.log("🧱 Creating tables...");
+  try {
+    // ✅ Connect to the database
+    const db = await connectDB();
 
-  await createUsersTable();
-  await createContactsTable();
-  await createAuthTable();
-  await createCountriesTable();
-  await createProvincesTable();
-  await createCitiesTable();
-  await createAddressesTable();
-  await createGownItemsTable();
-  await createSizesTable();
-  await createCartItemsTable();
-  await createOrdersTable();
-  await createOrderItemsTable();
-  await createReceiptsTable();
-  await createDiscountsTable();
+    console.log("🧱 Creating tables...");
 
-  // Seeds
-  await seedUsers();
-  await seedGownItems();
-  await seedAuth();
+    // 🧩 Create tables in dependency-safe order
+    await createUsersTable();
+    await createContactsTable();
+    await createAuthTable();
+    await createCountriesTable();
+    await createProvincesTable();
+    await createCitiesTable();
+    await createAddressesTable();
+    await createGownItemsTable();
+    await createSizesTable();
+    await createCartItemsTable();
+    await createOrdersTable();
+    await createOrderItemsTable();
+    await createReceiptsTable();
+    await createDiscountsTable();
 
-  console.log("✅ All tables created successfully!");
-  await db.end();
+    console.log("🌱 Seeding initial data...");
+    await seedUsers();
+    await seedGownItems();
+    await seedAuth();
+
+    console.log("✅ All tables created and seeded successfully!");
+
+    // Close the database connection
+    await db.end();
+  } catch (err) {
+    console.error("❌ Error initializing DB:", err);
+    process.exit(1);
+  }
 }
 
+// Run the initialization
 initDB();

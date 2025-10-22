@@ -1,6 +1,7 @@
-import { db } from '../config/db.js';
+import { getDB } from '../config/db.js';
 
-export async function createTable() {
+export async function createAuthTable() {
+  const db = getDB();
   await db.execute(`
     CREATE TABLE IF NOT EXISTS auth (
       user_id INT PRIMARY KEY,

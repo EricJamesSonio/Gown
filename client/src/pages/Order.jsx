@@ -1,7 +1,6 @@
 import React from "react";
 import "../css/pages/Order.css";
 import OrderSectionCard from "../components/orders/OrderSectionCard";
-import OrderSidebar from "../controls/OrderSidebar";
 
 const Order = () => {
   return (
@@ -44,7 +43,6 @@ const Order = () => {
       </div>
 
       {/* Sidebar */}
-      <OrderSidebar />
     </div>
   );
 };

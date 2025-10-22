@@ -1,6 +1,8 @@
-import { db } from '../config/db.js';
+import { getDB } from '../config/db.js';
 
 export async function seedGownItems() {
+  const db = getDB();
+
   const items = [
     {
       name: 'Elegant White Wedding Gown',

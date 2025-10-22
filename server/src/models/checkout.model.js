@@ -1,8 +1,8 @@
-// server/src/models/checkout.model.js
-import { db } from "../config/db.js";
+import { getDB } from "../config/db.js";
 
 // 🛒 Fetch user's cart with gown details
 export const getCartItemsByUser = async (userId) => {
+  const db = getDB();
   const [rows] = await db.execute(
     `SELECT ci.id, ci.gown_id, ci.quantity, ci.size, gi.price
      FROM cart_items ci
@@ -15,6 +15,7 @@ export const getCartItemsByUser = async (userId) => {
 
 // 🎟️ Get discount percentage if valid
 export const getDiscountByCode = async (code) => {
+  const db = getDB();
   const [rows] = await db.execute(
     `SELECT percentage
      FROM discounts
@@ -27,6 +28,7 @@ export const getDiscountByCode = async (code) => {
 
 // 🧾 Create a new order
 export const createOrder = async (userId, subtotal, discount, totalPayable) => {
+  const db = getDB();
   const [result] = await db.execute(
     `INSERT INTO orders (user_id, subtotal, discount, total_payable)
      VALUES (?, ?, ?, ?)`,
@@ -37,6 +39,7 @@ export const createOrder = async (userId, subtotal, discount, totalPayable) => {
 
 // 📦 Add order items
 export const addOrderItem = async (orderId, item) => {
+  const db = getDB();
   await db.execute(
     `INSERT INTO order_items (gown_id, size, quantity, price_each, order_id)
      VALUES (?, ?, ?, ?, ?)`,
@@ -52,11 +55,13 @@ export const addOrderItem = async (orderId, item) => {
 
 // 🧹 Clear user's cart
 export const clearUserCart = async (userId) => {
+  const db = getDB();
   await db.execute(`DELETE FROM cart_items WHERE user_id = ?`, [userId]);
 };
 
 // 🧾 Insert a receipt
 export const createReceipt = async (receiptCode, amountPaid, orderId) => {
+  const db = getDB();
   await db.execute(
     `INSERT INTO receipts (receipt_code, amount_paid, order_id, change_amount)
      VALUES (?, ?, ?, ?)`,

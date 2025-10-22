@@ -1,6 +1,8 @@
-import { db } from '../config/db.js';
+import { getDB } from '../config/db.js';
 
 export async function seedUsers() {
+  const db = getDB();
+
   const users = [
     { name: 'Admin User', role: 'admin' },
     { name: 'Customer User', role: 'customer' }
