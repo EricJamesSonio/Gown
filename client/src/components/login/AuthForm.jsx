@@ -36,7 +36,7 @@ export default function AuthForm({ isLogin }) {
         navigate("/products");
         
       } else {
-        navigate("/products");
+        navigate("/login");
       }
     } catch (err) {
       setMessage(err.message);
